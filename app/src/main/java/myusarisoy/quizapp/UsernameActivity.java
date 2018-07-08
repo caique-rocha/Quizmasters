@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class UsernameActivity extends AppCompatActivity {
 
-    ActionBar aBar;
+    //ActionBar aBar;
     EditText et;
 
     @Override
@@ -32,11 +33,11 @@ public class UsernameActivity extends AppCompatActivity {
             }
         }.start();
 
-        aBar = getSupportActionBar();
-        aBar.setTitle("Quiz App");
-        aBar.setSubtitle("by @myusarisoy");
+        //aBar = getSupportActionBar();
+        //aBar.setTitle("Quiz App");
+        //aBar.setSubtitle("by @myusarisoy");
     }
-
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add("About").setIcon(R.drawable.about).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -53,7 +54,7 @@ public class UsernameActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
-
+*/
     public void doOp(View view) {
         et = findViewById(R.id.etUname);
         String username = et.getText().toString();

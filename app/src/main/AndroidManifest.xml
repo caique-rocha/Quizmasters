@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="myusarisoy.quizapp">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +20,10 @@
         </activity>
         <activity android:name=".Categories" />
         <activity android:name=".BooksQuiz" />
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".Quiz" />
+        <activity android:name=".QuizFragment" />
+        <activity android:name=".Score" />
+        <activity android:name=".Result"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".Score">
+
+    <ImageView
+        android:layout_marginTop="150sp"
+        android:layout_width="250sp"
+        android:layout_height="250sp"
+        android:background="@drawable/quizapp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_marginTop="25sp"
+        android:id="@+id/txtTrueAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:hint="True Answer(s): "
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_marginTop="25sp"
+        android:id="@+id/txtWrongAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:hint="Wrong Answer(s): "
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_marginTop="25sp"
+        android:id="@+id/txtFinalScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:hint="Final Score: "
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_marginTop="40sp"
+        android:id="@+id/btnStartAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/background"
+        android:text="Start Again"/>
+
+</LinearLayout>

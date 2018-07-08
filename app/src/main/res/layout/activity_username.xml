@@ -10,30 +10,30 @@
     tools:context=".UsernameActivity">
 
     <TextView
-        android:layout_marginTop="200sp"
+        android:layout_marginTop="300sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/tvUname"
-        android:textColor="@color/colorAccent"
-        android:textSize="20sp"
+        android:textColor="@color/text"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:gravity="left"/>
 
     <EditText
         android:layout_marginTop="10sp"
         android:id="@+id/etUname"
+        android:inputType="textCapWords"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text=""
-        android:textColorHint="@color/text"
+        android:textColor="@color/text"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:gravity="center"/>
 
     <Button
-        style="?android:attr/borderlessButtonStyle"
         android:layout_marginTop="30sp"
         android:id="@+id/btnStart"
         android:onClick="doOp"
@@ -42,7 +42,7 @@
         android:layout_gravity="center"
         android:text="Next"
         android:textSize="18sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/text"
         android:textStyle="bold"
         android:background="@color/background"/>
 

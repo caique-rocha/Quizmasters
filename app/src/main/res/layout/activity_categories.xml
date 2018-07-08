@@ -11,26 +11,26 @@
 
     <TextView
         android:id="@+id/tvAsk"
-        android:layout_marginTop="200sp"
+        android:layout_marginTop="300sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
         android:layout_gravity="center"
         android:textColor="@color/text"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:gravity="center"/>
 
     <Button
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_marginTop="30sp"
-        android:onClick="startQuiz"
-        android:layout_width="match_parent"
+        android:id="@+id/btnStart"
+        android:layout_marginTop="50sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Start Quiz"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/text"
         android:background="@color/background"/>
 
 </LinearLayout>

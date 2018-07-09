@@ -26,9 +26,15 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class QuizFragment extends Fragment {
+    Result result = new Result();
     boolean isRunning = false;
     int scoreCount;
     RequestQueue requestQueue;
@@ -114,17 +120,22 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booFirst == true) {
                     btnFirst.setBackgroundColor(Color.GREEN);
-                    scoreList.add(index, "true");
+                    btnSecond.setEnabled(false);
+                    btnThird.setEnabled(false);
+                    btnFourth.setEnabled(false);
                     upScore();
                 }
                 else
                     btnFirst.setBackgroundColor(Color.RED);
-                    scoreList.add(index, "false");
-                new CountDownTimer(500,500){
+                    btnSecond.setEnabled(false);
+                    btnThird.setEnabled(false);
+                    btnFourth.setEnabled(false);
+                new CountDownTimer(1000,1000){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
                     public void onFinish(){
+                        enableButton();
                         if(index == questionList.size() - 1){
                             gotoResult();
                         }
@@ -143,17 +154,22 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booSecond == true) {
                     btnSecond.setBackgroundColor(Color.GREEN);
-                    scoreList.add(index, "true");
+                    btnFirst.setEnabled(false);
+                    btnThird.setEnabled(false);
+                    btnFourth.setEnabled(false);
                     upScore();
                 }
                 else
                     btnSecond.setBackgroundColor(Color.RED);
-                    scoreList.add(index, "false");
-                new CountDownTimer(500,500){
+                    btnFirst.setEnabled(false);
+                    btnThird.setEnabled(false);
+                    btnFourth.setEnabled(false);
+                new CountDownTimer(1000,1000){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
                     public void onFinish(){
+                        enableButton();
                         if(index == questionList.size() - 1){
                             gotoResult();
                         }
@@ -172,17 +188,22 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booThird == true) {
                     btnThird.setBackgroundColor(Color.GREEN);
-                    scoreList.add(index, "true");
+                    btnFirst.setEnabled(false);
+                    btnSecond.setEnabled(false);
+                    btnFourth.setEnabled(false);
                     upScore();
                 }
                 else
                     btnThird.setBackgroundColor(Color.RED);
-                    scoreList.add(index, "false");
-                new CountDownTimer(500,500){
+                    btnFirst.setEnabled(false);
+                    btnSecond.setEnabled(false);
+                    btnFourth.setEnabled(false);
+                new CountDownTimer(1000,1000){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
                     public void onFinish(){
+                        enableButton();
                         if(index == questionList.size() - 1){
                             gotoResult();
                         }
@@ -201,17 +222,22 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booFourth == true) {
                     btnFourth.setBackgroundColor(Color.GREEN);
-                    scoreList.add(index, "true");
+                    btnFirst.setEnabled(false);
+                    btnSecond.setEnabled(false);
+                    btnThird.setEnabled(false);
                     upScore();
                 }
                 else
                     btnFourth.setBackgroundColor(Color.RED);
-                    scoreList.add(index, "false");
-                new CountDownTimer(500,500){
+                    btnFirst.setEnabled(false);
+                    btnSecond.setEnabled(false);
+                    btnThird.setEnabled(false);
+                new CountDownTimer(1000,1000){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
                     public void onFinish(){
+                        enableButton();
                         if(index == questionList.size() - 1){
                             gotoResult();
                         }
@@ -248,10 +274,16 @@ public class QuizFragment extends Fragment {
         txtScore.setText("Score: " + scoreCount);
     }
 
+    public void enableButton(){
+        btnFirst.setEnabled(true);
+        btnSecond.setEnabled(true);
+        btnThird.setEnabled(true);
+        btnFourth.setEnabled(true);
+    }
+
     public void gotoResult(){
-        Intent resultIntent = new Intent(getActivity(), Score.class);
+        Intent resultIntent = new Intent(getActivity(), Result.class);
         resultIntent.putExtra("score", scoreCount);
-        resultIntent.putStringArrayListExtra("scoreList", scoreList);
         startActivity(resultIntent);
     }
 

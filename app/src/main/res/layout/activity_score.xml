@@ -25,6 +25,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"/>
 
     <TextView
@@ -37,6 +38,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"/>
 
     <TextView
@@ -49,6 +51,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"/>
 
     <Button
@@ -58,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/background"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="Start Again"/>
 
 </LinearLayout>

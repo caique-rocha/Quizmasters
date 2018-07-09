@@ -19,6 +19,7 @@
         android:textColor="@color/text"
         android:textStyle="bold"
         android:textSize="25sp"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"/>
 
     <Button
@@ -31,6 +32,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/text"
+        android:fontFamily="sans-serif-smallcaps"
         android:background="@color/background"/>
 
 </LinearLayout>

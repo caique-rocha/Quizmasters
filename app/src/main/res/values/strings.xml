@@ -2,6 +2,7 @@
     <string name="app_name">Quizmasters</string>
     <string name="tvUname">Enter a Username</string>
     <string name="etUname">@username</string>
+    <string name="username">@</string>
     <string name="seeScore">See Your Detailed Score</string>
 
     <!-- TODO: Remove or change this placeholder text -->

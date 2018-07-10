@@ -9,15 +9,15 @@
     tools:context=".Score">
 
     <ImageView
-        android:layout_marginTop="150sp"
+        android:layout_marginTop="125sp"
         android:layout_width="250sp"
         android:layout_height="250sp"
         android:background="@drawable/quizapp"
         android:layout_gravity="center"/>
 
     <TextView
-        android:layout_marginTop="25sp"
-        android:id="@+id/txtTrueAnswer"
+        android:layout_marginTop="20sp"
+        android:id="@+id/textViewTrueAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/text"
@@ -29,8 +29,8 @@
         android:gravity="center"/>
 
     <TextView
-        android:layout_marginTop="25sp"
-        android:id="@+id/txtWrongAnswer"
+        android:layout_marginTop="20sp"
+        android:id="@+id/textViewWrongAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/text"
@@ -42,8 +42,8 @@
         android:gravity="center"/>
 
     <TextView
-        android:layout_marginTop="25sp"
-        android:id="@+id/txtFinalScore"
+        android:layout_marginTop="20sp"
+        android:id="@+id/textViewFinalScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/text"
@@ -56,7 +56,7 @@
 
     <Button
         android:layout_marginTop="40sp"
-        android:id="@+id/btnStartAgain"
+        android:id="@+id/buttonStartAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

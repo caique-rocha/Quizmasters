@@ -10,7 +10,7 @@
     tools:context=".Categories">
 
     <TextView
-        android:id="@+id/tvAsk"
+        android:id="@+id/textViewReady"
         android:layout_marginTop="300sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,12 +23,12 @@
         android:gravity="center"/>
 
     <Button
-        android:id="@+id/btnStart"
+        android:id="@+id/buttonStartQuiz"
         android:layout_marginTop="50sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Start Quiz"
+        android:text="@string/startQuiz"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/text"

@@ -10,33 +10,36 @@ import android.widget.TextView;
 
 public class Score extends AppCompatActivity {
 
-    TextView txtTrueAnswer, txtWrongAnswer, txtFinalScore;
-    Button btnStartAgain;
+    TextView textViewTrueAnswer, textViewWrongAnswer, textViewFinalScore;
+
+    Button buttonStartAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        textViewTrueAnswer = findViewById(R.id.textViewTrueAnswer);
+        textViewWrongAnswer = findViewById(R.id.textViewWrongAnswer);
+        textViewFinalScore = findViewById(R.id.textViewFinalScore);
+
+        buttonStartAgain = findViewById(R.id.buttonStartAgain);
+
         int allQuestions = 10;
         int trueQuestions = getIntent().getIntExtra("score", 0);
 
-        txtTrueAnswer = findViewById(R.id.txtTrueAnswer);
-        txtTrueAnswer.setText("True Answer(s): " + (trueQuestions / 10));
+        textViewTrueAnswer.setText("True Answer(s): " + (trueQuestions / 10));
+        textViewWrongAnswer.setText("Wrong Answer(s): " + (allQuestions - (trueQuestions) / 10));
+        textViewFinalScore.setText("Total Score: " + trueQuestions);
 
-        txtWrongAnswer = findViewById(R.id.txtWrongAnswer);
-        txtWrongAnswer.setText("Wrong Answer(s): " + (allQuestions - (trueQuestions) / 10));
-
-        txtFinalScore = findViewById(R.id.txtFinalScore);
-        txtFinalScore.setText("Total Score: " + trueQuestions);
-
-        btnStartAgain = findViewById(R.id.btnStartAgain);
-        btnStartAgain.setOnClickListener(new View.OnClickListener() {
+        buttonStartAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gotoStart = new Intent(Score.this, UsernameActivity.class);
                 startActivity(gotoStart);
             }
         });
+
     }
+
 }

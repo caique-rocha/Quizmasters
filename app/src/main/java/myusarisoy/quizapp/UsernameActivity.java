@@ -9,57 +9,40 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class UsernameActivity extends AppCompatActivity {
 
-    //ActionBar aBar;
-    EditText et;
+        EditText editTextUsername;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.opening);
-        //display the logo during 1 second,
-        new CountDownTimer(1000,1000){
-            @Override
-            public void onTick(long millisUntilFinished){}
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.opening);
 
-            @Override
-            public void onFinish(){
-                //set the new Content of your activity
-                UsernameActivity.this.setContentView(R.layout.activity_username);
-            }
-        }.start();
+            // Display the logo during 1 second.
+            new CountDownTimer(1000,1000){
+                @Override
+                public void onTick(long millisUntilFinished){}
 
-        //aBar = getSupportActionBar();
-        //aBar.setTitle("Quiz App");
-        //aBar.setSubtitle("by @myusarisoy");
-    }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("About").setIcon(R.drawable.about).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add("Exit").setIcon(R.drawable.exit).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        return super.onCreateOptionsMenu(menu);
-    }
+                @Override
+                public void onFinish(){
+                    // Set the new content.
+                    UsernameActivity.this.setContentView(R.layout.activity_username);
+                }
+            }.start();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        String title = item.getTitle().toString();
-        if(title.equals("About"))
-            Toast.makeText(UsernameActivity.this, "Quiz App is an application that tests" + "\nyour information in specific categories.", Toast.LENGTH_LONG).show();
-        if(title.equals("Exit"))
-            finish();
-        return super.onOptionsItemSelected(item);
-    }
-*/
-    public void doOp(View view) {
-        et = findViewById(R.id.etUname);
-        String username = et.getText().toString();
-        Intent i = new Intent(UsernameActivity.this, Categories.class);
-        i.putExtra("username", username);
-        startActivity(i);
-    }
+        }
+
+        // Go to next activity, Categories.
+        public void gotoNextActivity(View view) {
+            editTextUsername = findViewById(R.id.editTextUsername);
+            String username = editTextUsername.getText().toString();
+            Intent intent = new Intent(UsernameActivity.this, Categories.class);
+            intent.putExtra("username", username);
+            startActivity(intent);
+        }
+
 }

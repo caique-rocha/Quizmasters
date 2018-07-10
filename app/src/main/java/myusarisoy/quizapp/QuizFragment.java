@@ -34,41 +34,57 @@ import java.util.Collections;
 import java.util.List;
 
 public class QuizFragment extends Fragment {
-    Result result = new Result();
+
+    View root;
+
     boolean isRunning = false;
+
     int scoreCount;
+
     RequestQueue requestQueue;
+
     ImageView imageView;
-    boolean booFirst, booSecond, booThird, booFourth;
-    TextView txtScore, txtTimer, txtQuestion;
-    Button btnFirst, btnSecond, btnThird, btnFourth;
+
+    boolean booleanFirst, booleanSecond, booleanThird, booleanFourth;
+
+    TextView textViewScore, textViewTimer, textViewQuestion;
+
+    Button buttonFirst, buttonSecond, buttonThird, buttonFourth;
+
     ArrayList<String> questionList = new ArrayList<>();
     ArrayList<String> choiceList = new ArrayList<>();
     ArrayList<Boolean> correctList = new ArrayList<>();
-    public static ArrayList<String> scoreList = new ArrayList<>();
+    public static ArrayList<String> scoreList = new ArrayList<>(10);
+
     private int[] quizImages = {  R.drawable.question1, R.drawable.question2
                                 , R.drawable.question3, R.drawable.question4
                                 , R.drawable.question5, R.drawable.question6
                                 , R.drawable.question7, R.drawable.question8
                                 , R.drawable.question9, R.drawable.question10};
+
     public int index = 0;
-    View root;
 
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_quiz, container, false);
 
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        this.txtScore = root.findViewById(R.id.txtScore);
-        txtScore.setText("Score: " + scoreCount);
-        txtTimer = root.findViewById(R.id.txtTimer);
-        txtQuestion = root.findViewById(R.id.txtQuestion);
+
+        textViewScore = root.findViewById(R.id.textViewScore);
+        textViewScore.setText("Score: " + scoreCount);
+        textViewTimer = root.findViewById(R.id.textViewTimer);
+        textViewQuestion = root.findViewById(R.id.textViewQuestion);
+
         imageView = root.findViewById(R.id.imageQuiz);
-        btnFirst = root.findViewById(R.id.btnFirst);
-        btnSecond = root.findViewById(R.id.btnSecond);
-        btnThird = root.findViewById(R.id.btnThird);
-        btnFourth = root.findViewById(R.id.btnFourth);
+
+        buttonFirst = root.findViewById(R.id.buttonFirst);
+        buttonSecond = root.findViewById(R.id.buttonSecond);
+        buttonThird = root.findViewById(R.id.buttonThird);
+        buttonFourth = root.findViewById(R.id.buttonFourth);
+
+        // Set your URL tto fetch API data.
         String url = "https://private-anon-a98702efdd-quizmasters.apiary-mock.com/questions";
 
+        // Fetch data.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -100,11 +116,12 @@ public class QuizFragment extends Fragment {
         });
         requestQueue.add(jsonArrayRequest);
 
+        // 100 seconds to complete the quiz.
         new CountDownTimer(100000,1000){
             @Override
             public void onTick(long millisUntilFinished){
                 isRunning = true;
-                txtTimer.setText("Remaining Time: " + millisUntilFinished / 1000);
+                textViewTimer.setText("Remaining Time: " + millisUntilFinished / 1000);
                 if((millisUntilFinished / 1000) == 30)
                 Toast.makeText(getActivity().getApplicationContext(), "Last " + 30 + " seconds!", Toast.LENGTH_LONG).show();
             }
@@ -115,22 +132,27 @@ public class QuizFragment extends Fragment {
             }
         }.start();
 
-        btnFirst.setOnClickListener(new View.OnClickListener() {
+        // Click buttonFirst for the true answer.
+        buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(booFirst == true) {
-                    btnFirst.setBackgroundColor(Color.GREEN);
-                    btnSecond.setEnabled(false);
-                    btnThird.setEnabled(false);
-                    btnFourth.setEnabled(false);
-                    upScore();
+                if(booleanFirst == true) {
+                    buttonFirst.setBackgroundColor(Color.GREEN);
+                    scoreList.add("true");
+                    buttonSecond.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+                    addScore();
                 }
-                else
-                    btnFirst.setBackgroundColor(Color.RED);
-                    btnSecond.setEnabled(false);
-                    btnThird.setEnabled(false);
-                    btnFourth.setEnabled(false);
-                new CountDownTimer(1000,1000){
+                else {
+                    buttonFirst.setBackgroundColor(Color.RED);
+                    scoreList.add("false");
+                    buttonSecond.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+                }
+                // 0.5 seconds to go to next question.
+                new CountDownTimer(500,500){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
@@ -142,29 +164,34 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
-                            btnFirst.setBackgroundResource(R.color.buttonBackground);
+                            buttonFirst.setBackgroundResource(R.color.buttonBackground);
                         }
                     }
                 }.start();
             }
         });
 
-        btnSecond.setOnClickListener(new View.OnClickListener() {
+        // Click buttonSecond for the true answer.
+        buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(booSecond == true) {
-                    btnSecond.setBackgroundColor(Color.GREEN);
-                    btnFirst.setEnabled(false);
-                    btnThird.setEnabled(false);
-                    btnFourth.setEnabled(false);
-                    upScore();
+                if(booleanSecond == true) {
+                    buttonSecond.setBackgroundColor(Color.GREEN);
+                    scoreList.add("true");
+                    buttonFirst.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+                    addScore();
                 }
-                else
-                    btnSecond.setBackgroundColor(Color.RED);
-                    btnFirst.setEnabled(false);
-                    btnThird.setEnabled(false);
-                    btnFourth.setEnabled(false);
-                new CountDownTimer(1000,1000){
+                else {
+                    buttonSecond.setBackgroundColor(Color.RED);
+                    scoreList.add("false");
+                    buttonFirst.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+                }
+                // 0.5 seconds to go to next question.
+                new CountDownTimer(500,500){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
@@ -176,29 +203,34 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
-                            btnSecond.setBackgroundResource(R.color.buttonBackground);
+                            buttonSecond.setBackgroundResource(R.color.buttonBackground);
                         }
                     }
                 }.start();
             }
         });
 
-        btnThird.setOnClickListener(new View.OnClickListener() {
+        // Click buttonThird for the true answer.
+        buttonThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(booThird == true) {
-                    btnThird.setBackgroundColor(Color.GREEN);
-                    btnFirst.setEnabled(false);
-                    btnSecond.setEnabled(false);
-                    btnFourth.setEnabled(false);
-                    upScore();
+                if(booleanThird == true) {
+                    buttonThird.setBackgroundColor(Color.GREEN);
+                    scoreList.add("true");
+                    buttonFirst.setEnabled(false);
+                    buttonSecond.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+                    addScore();
                 }
-                else
-                    btnThird.setBackgroundColor(Color.RED);
-                    btnFirst.setEnabled(false);
-                    btnSecond.setEnabled(false);
-                    btnFourth.setEnabled(false);
-                new CountDownTimer(1000,1000){
+                else {
+                    buttonThird.setBackgroundColor(Color.RED);
+                    scoreList.add("false");
+                    buttonFirst.setEnabled(false);
+                    buttonSecond.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+                }
+                // 0.5 seconds to go to next question.
+                new CountDownTimer(500,500){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
@@ -210,29 +242,34 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
-                            btnThird.setBackgroundResource(R.color.buttonBackground);
+                            buttonThird.setBackgroundResource(R.color.buttonBackground);
                         }
                     }
                 }.start();
             }
         });
 
-        btnFourth.setOnClickListener(new View.OnClickListener() {
+        // Click buttonFourth for the true answer.
+        buttonFourth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(booFourth == true) {
-                    btnFourth.setBackgroundColor(Color.GREEN);
-                    btnFirst.setEnabled(false);
-                    btnSecond.setEnabled(false);
-                    btnThird.setEnabled(false);
-                    upScore();
+                if(booleanFourth == true) {
+                    buttonFourth.setBackgroundColor(Color.GREEN);
+                    scoreList.add("true");
+                    buttonFirst.setEnabled(false);
+                    buttonSecond.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                    addScore();
                 }
-                else
-                    btnFourth.setBackgroundColor(Color.RED);
-                    btnFirst.setEnabled(false);
-                    btnSecond.setEnabled(false);
-                    btnThird.setEnabled(false);
-                new CountDownTimer(1000,1000){
+                else {
+                    buttonFourth.setBackgroundColor(Color.RED);
+                    scoreList.add("false");
+                    buttonFirst.setEnabled(false);
+                    buttonSecond.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                }
+                // 0.5 seconds to go to next question.
+                new CountDownTimer(500,500){
                     @Override
                     public void onTick(long millisUntilFinished){}
                     @Override
@@ -244,7 +281,7 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
-                            btnFourth.setBackgroundResource(R.color.buttonBackground);
+                            buttonFourth.setBackgroundResource(R.color.buttonBackground);
                         }
                     }
                 }.start();
@@ -254,35 +291,43 @@ public class QuizFragment extends Fragment {
         return root;
     }
 
+    // Set questions to textView and choices to button for each question.
     public void nextQuestion(int index) {
             index++;
-            txtQuestion.setText(questionList.get(index));
-            btnFirst.setText(choiceList.get(index * 4));
-            btnSecond.setText(choiceList.get((index * 4) + 1));
-            btnThird.setText(choiceList.get((index * 4) + 2));
-            btnFourth.setText(choiceList.get((index * 4) + 3));
+
+            textViewQuestion.setText((index + 1) + ". " + questionList.get(index));
+            buttonFirst.setText(choiceList.get(index * 4));
+            buttonSecond.setText(choiceList.get((index * 4) + 1));
+            buttonThird.setText(choiceList.get((index * 4) + 2));
+            buttonFourth.setText(choiceList.get((index * 4) + 3));
+
+            // Set specific image from array for each question.
             imageView.setImageResource(quizImages[index]);
 
-            booFirst = correctList.get(index * 4);
-            booSecond = correctList.get((index * 4) + 1);
-            booThird = correctList.get((index * 4) + 2);
-            booFourth = correctList.get((index * 4) + 3);
+            booleanFirst = correctList.get(index * 4);
+            booleanSecond = correctList.get((index * 4) + 1);
+            booleanThird = correctList.get((index * 4) + 2);
+            booleanFourth = correctList.get((index * 4) + 3);
     }
 
-    public void upScore(){
+    // If the choice is correct, add 10 score.
+    public void addScore(){
         scoreCount += 10;
-        txtScore.setText("Score: " + scoreCount);
+        textViewScore.setText("Score: " + scoreCount);
     }
 
+    // After go to next question, set all buttons enabled.
     public void enableButton(){
-        btnFirst.setEnabled(true);
-        btnSecond.setEnabled(true);
-        btnThird.setEnabled(true);
-        btnFourth.setEnabled(true);
+        buttonFirst.setEnabled(true);
+        buttonSecond.setEnabled(true);
+        buttonThird.setEnabled(true);
+        buttonFourth.setEnabled(true);
     }
 
+    // Go to next activity, Result.
     public void gotoResult(){
         Intent resultIntent = new Intent(getActivity(), Result.class);
+        resultIntent.putStringArrayListExtra("scoreList", scoreList);
         resultIntent.putExtra("score", scoreCount);
         startActivity(resultIntent);
     }

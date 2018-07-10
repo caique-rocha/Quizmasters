@@ -18,7 +18,7 @@
 
     <TextView
         android:layout_weight="2"
-        android:id="@+id/txtScore"
+        android:id="@+id/textViewScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -31,7 +31,7 @@
 
         <TextView
             android:layout_weight="1"
-            android:id="@+id/txtTimer"
+            android:id="@+id/textViewTimer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtQuestion"
+        android:id="@+id/textViewQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30sp"
@@ -71,7 +71,7 @@
         android:orientation="vertical">
 
     <Button
-        android:id="@+id/btnFirst"
+        android:id="@+id/buttonFirst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Choice"
@@ -83,20 +83,7 @@
         android:background="@color/buttonBackground"/>
 
     <Button
-        android:id="@+id/btnSecond"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:hint="Choice"
-        android:textColor="@color/text"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:fontFamily="sans-serif-smallcaps"
-        android:background="@color/buttonBackground"/>
-
-    <Button
-        android:id="@+id/btnThird"
+        android:id="@+id/buttonSecond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
@@ -109,7 +96,20 @@
         android:background="@color/buttonBackground"/>
 
     <Button
-        android:id="@+id/btnFourth"
+        android:id="@+id/buttonThird"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:hint="Choice"
+        android:textColor="@color/text"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
+        android:background="@color/buttonBackground"/>
+
+    <Button
+        android:id="@+id/buttonFourth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"

@@ -37,23 +37,23 @@ public class QuizFragment extends Fragment {
 
     View root;
 
-    boolean isRunning = false;
+    public boolean isRunning = false;
 
-    int scoreCount;
+    private int scoreCount;
 
     RequestQueue requestQueue;
 
-    ImageView imageView;
+    private ImageView imageView;
 
-    boolean booleanFirst, booleanSecond, booleanThird, booleanFourth;
+    private boolean booleanFirst, booleanSecond, booleanThird, booleanFourth;
 
-    TextView textViewScore, textViewTimer, textViewQuestion;
+    private TextView textViewScore, textViewTimer, textViewQuestion;
 
-    Button buttonFirst, buttonSecond, buttonThird, buttonFourth;
+    private Button buttonFirst, buttonSecond, buttonThird, buttonFourth;
 
-    ArrayList<String> questionList = new ArrayList<>();
-    ArrayList<String> choiceList = new ArrayList<>();
-    ArrayList<Boolean> correctList = new ArrayList<>();
+    private ArrayList<String> questionList = new ArrayList<>();
+    private ArrayList<String> choiceList = new ArrayList<>();
+    private ArrayList<Boolean> correctList = new ArrayList<>();
     public static ArrayList<String> scoreList = new ArrayList<>(10);
 
     private int[] quizImages = {  R.drawable.question1, R.drawable.question2
@@ -144,8 +144,18 @@ public class QuizFragment extends Fragment {
                     buttonFourth.setEnabled(false);
                     addScore();
                 }
+                // If first choice is false; set first button's background color
+                // as red, and set true button's background color as green.
                 else {
                     buttonFirst.setBackgroundColor(Color.RED);
+
+                    if(booleanSecond == true)
+                        buttonSecond.setBackgroundColor(Color.GREEN);
+                    else if(booleanThird == true)
+                        buttonThird.setBackgroundColor(Color.GREEN);
+                    else if(booleanFourth == true)
+                        buttonFourth.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
@@ -165,6 +175,9 @@ public class QuizFragment extends Fragment {
                             nextQuestion(index);
                             index++;
                             buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                            buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                            buttonThird.setBackgroundResource(R.color.buttonBackground);
+                            buttonFourth.setBackgroundResource(R.color.buttonBackground);
                         }
                     }
                 }.start();
@@ -183,8 +196,18 @@ public class QuizFragment extends Fragment {
                     buttonFourth.setEnabled(false);
                     addScore();
                 }
+                // If second choice is false; set second button's background color
+                // as red, and set true button's background color as green.
                 else {
                     buttonSecond.setBackgroundColor(Color.RED);
+
+                    if(booleanFirst == true)
+                        buttonSecond.setBackgroundColor(Color.GREEN);
+                    else if(booleanThird == true)
+                        buttonThird.setBackgroundColor(Color.GREEN);
+                    else if(booleanFourth == true)
+                        buttonFourth.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonFirst.setEnabled(false);
                     buttonThird.setEnabled(false);
@@ -203,7 +226,10 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
+                            buttonFirst.setBackgroundResource(R.color.buttonBackground);
                             buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                            buttonThird.setBackgroundResource(R.color.buttonBackground);
+                            buttonFourth.setBackgroundResource(R.color.buttonBackground);
                         }
                     }
                 }.start();
@@ -222,8 +248,18 @@ public class QuizFragment extends Fragment {
                     buttonFourth.setEnabled(false);
                     addScore();
                 }
+                // If third choice is false; set third button's background color
+                // as red, and set true button's background color as green.
                 else {
                     buttonThird.setBackgroundColor(Color.RED);
+
+                    if(booleanFirst == true)
+                        buttonSecond.setBackgroundColor(Color.GREEN);
+                    else if(booleanSecond == true)
+                        buttonThird.setBackgroundColor(Color.GREEN);
+                    else if(booleanFourth == true)
+                        buttonFourth.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
@@ -242,7 +278,10 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
+                            buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                            buttonSecond.setBackgroundResource(R.color.buttonBackground);
                             buttonThird.setBackgroundResource(R.color.buttonBackground);
+                            buttonFourth.setBackgroundResource(R.color.buttonBackground);
                         }
                     }
                 }.start();
@@ -261,8 +300,18 @@ public class QuizFragment extends Fragment {
                     buttonThird.setEnabled(false);
                     addScore();
                 }
+                // If fourth choice is false; set fourth button's background color
+                // as red, and set true button's background color as green.
                 else {
                     buttonFourth.setBackgroundColor(Color.RED);
+
+                    if(booleanFirst == true)
+                        buttonSecond.setBackgroundColor(Color.GREEN);
+                    else if(booleanSecond == true)
+                        buttonThird.setBackgroundColor(Color.GREEN);
+                    else if(booleanThird == true)
+                        buttonFourth.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
@@ -281,6 +330,9 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
+                            buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                            buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                            buttonThird.setBackgroundResource(R.color.buttonBackground);
                             buttonFourth.setBackgroundResource(R.color.buttonBackground);
                         }
                     }

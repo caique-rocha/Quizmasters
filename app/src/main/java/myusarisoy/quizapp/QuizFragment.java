@@ -37,7 +37,7 @@ public class QuizFragment extends Fragment {
 
     View root;
 
-    public boolean isRunning = false;
+    private CountDownTimer countDownTimer; 
 
     private int scoreCount;
 
@@ -116,19 +116,44 @@ public class QuizFragment extends Fragment {
         });
         requestQueue.add(jsonArrayRequest);
 
-        // 100 seconds to complete the quiz.
-        new CountDownTimer(100000,1000){
+        // 10 seconds to complete each of the questions.
+        countDownTimer = new CountDownTimer(10000,1000){
             @Override
             public void onTick(long millisUntilFinished){
-                isRunning = true;
                 textViewTimer.setText("Remaining Time: " + millisUntilFinished / 1000);
-                if((millisUntilFinished / 1000) == 30)
-                Toast.makeText(getActivity().getApplicationContext(), "Last " + 30 + " seconds!", Toast.LENGTH_LONG).show();
             }
             @Override
             public void onFinish(){
-                isRunning = false;
-                gotoResult();
+                if(buttonFirst.isPressed() == false || buttonSecond.isPressed() == false
+                        || buttonThird.isPressed() == false || buttonFourth.isPressed() == false) {
+                    scoreList.add("");
+                    buttonSecond.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+
+                    // 0.5 seconds to go to next question.
+                    new CountDownTimer(500,500){
+                        @Override
+                        public void onTick(long millisUntilFinished){}
+                        @Override
+                        public void onFinish(){
+                            enableButton();
+                            if(index == questionList.size() - 1){
+                                gotoResult();
+                            }
+                            else{
+                                nextQuestion(index);
+                                index++;
+                                buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                                buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                                buttonThird.setBackgroundResource(R.color.buttonBackground);
+                                buttonFourth.setBackgroundResource(R.color.buttonBackground);
+                                countDownTimer.cancel();
+                                countDownTimer.start();
+                            }
+                        }
+                    }.start();
+                }
             }
         }.start();
 

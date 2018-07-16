@@ -17,6 +17,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:layout_marginRight="10sp"
             android:layout_weight="1"
             android:id="@+id/button1"
             android:layout_width="wrap_content"
@@ -45,6 +46,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:layout_marginRight="10sp"
             android:layout_weight="1"
             android:id="@+id/button3"
             android:layout_width="wrap_content"
@@ -74,6 +76,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:layout_marginRight="10sp"
             android:layout_weight="1"
             android:id="@+id/button5"
             android:layout_width="wrap_content"
@@ -103,6 +106,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:layout_marginRight="10sp"
             android:layout_weight="1"
             android:id="@+id/button7"
             android:layout_width="wrap_content"
@@ -132,6 +136,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:layout_marginRight="10sp"
             android:layout_weight="1"
             android:id="@+id/button9"
             android:layout_width="wrap_content"
@@ -161,7 +166,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:hint="Score"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/text"
         android:fontFamily="sans-serif-smallcaps"/>
@@ -174,7 +179,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/seeScore"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/text"
             android:fontFamily="sans-serif-smallcaps"

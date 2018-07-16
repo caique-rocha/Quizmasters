@@ -6,4 +6,7 @@
     <color name="text">#373737</color>
     <color name="buttonBackground">#e5e5e5</color>
     <color name="background">#4da6ff</color>
+    <color name="trueAnswer">#009900</color>
+    <color name="blankAnswer">#000096</color>
+    <color name="falseAnswer">#c12525</color>
 </resources>

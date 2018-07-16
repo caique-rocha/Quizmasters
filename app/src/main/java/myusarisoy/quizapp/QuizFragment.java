@@ -1,6 +1,7 @@
 package myusarisoy.quizapp;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -37,23 +38,23 @@ public class QuizFragment extends Fragment {
 
     View root;
 
-    boolean isRunning = false;
+    private CountDownTimer countDownTimer;
 
-    int scoreCount;
+    private int scoreCount, trueCounter = 0, allQuestions = 0;
 
     RequestQueue requestQueue;
 
-    ImageView imageView;
+    private ImageView imageView;
 
-    boolean booleanFirst, booleanSecond, booleanThird, booleanFourth;
+    private boolean booleanFirst, booleanSecond, booleanThird, booleanFourth;
 
-    TextView textViewScore, textViewTimer, textViewQuestion;
+    private TextView textViewScore, textViewRate, textViewTimer, textViewQuestion;
 
-    Button buttonFirst, buttonSecond, buttonThird, buttonFourth;
+    private Button buttonFirst, buttonSecond, buttonThird, buttonFourth;
 
-    ArrayList<String> questionList = new ArrayList<>();
-    ArrayList<String> choiceList = new ArrayList<>();
-    ArrayList<Boolean> correctList = new ArrayList<>();
+    private ArrayList<String> questionList = new ArrayList<>();
+    private ArrayList<String> choiceList = new ArrayList<>();
+    private ArrayList<Boolean> correctList = new ArrayList<>();
     public static ArrayList<String> scoreList = new ArrayList<>(10);
 
     private int[] quizImages = {  R.drawable.question1, R.drawable.question2
@@ -71,6 +72,8 @@ public class QuizFragment extends Fragment {
 
         textViewScore = root.findViewById(R.id.textViewScore);
         textViewScore.setText("Score: " + scoreCount);
+        textViewRate = root.findViewById(R.id.textViewRate);
+        textViewRate.setText("Questions: " + (scoreCount / 10) + " / " + allQuestions);
         textViewTimer = root.findViewById(R.id.textViewTimer);
         textViewQuestion = root.findViewById(R.id.textViewQuestion);
 
@@ -116,21 +119,47 @@ public class QuizFragment extends Fragment {
         });
         requestQueue.add(jsonArrayRequest);
 
-        // 100 seconds to complete the quiz.
-        new CountDownTimer(100000,1000){
+        // 10 seconds to complete each of the questions.
+        countDownTimer = new CountDownTimer(10000,1000){
             @Override
             public void onTick(long millisUntilFinished){
-                isRunning = true;
                 textViewTimer.setText("Remaining Time: " + millisUntilFinished / 1000);
-                if((millisUntilFinished / 1000) == 30)
-                Toast.makeText(getActivity().getApplicationContext(), "Last " + 30 + " seconds!", Toast.LENGTH_LONG).show();
             }
             @Override
             public void onFinish(){
-                isRunning = false;
-                gotoResult();
+                if(buttonFirst.isPressed() == false || buttonSecond.isPressed() == false
+                        || buttonThird.isPressed() == false || buttonFourth.isPressed() == false) {
+                    scoreList.add("");
+                    buttonSecond.setEnabled(false);
+                    buttonThird.setEnabled(false);
+                    buttonFourth.setEnabled(false);
+
+                    // 0.5 seconds to go to next question.
+                    new CountDownTimer(500,500){
+                        @Override
+                        public void onTick(long millisUntilFinished){}
+                        @Override
+                        public void onFinish(){
+                            enableButton();
+                            if(index == questionList.size() - 1){
+                                gotoResult();
+                            }
+                            else{
+                                nextQuestion(index);
+                                index++;
+                                buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                                buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                                buttonThird.setBackgroundResource(R.color.buttonBackground);
+                                buttonFourth.setBackgroundResource(R.color.buttonBackground);
+                                countDownTimer.cancel();
+                                countDownTimer.start();
+                            }
+                        }
+                    }.start();
+                }
             }
         }.start();
+
 
         // Click buttonFirst for the true answer.
         buttonFirst.setOnClickListener(new View.OnClickListener() {
@@ -142,15 +171,25 @@ public class QuizFragment extends Fragment {
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
+                    trueCounter+=1;
                     addScore();
                 }
-                else {
+                else if(booleanFirst == false) {
                     buttonFirst.setBackgroundColor(Color.RED);
+
+                    if(booleanSecond == true)
+                        buttonSecond.setBackgroundColor(Color.GREEN);
+                    else if(booleanThird == true)
+                        buttonThird.setBackgroundColor(Color.GREEN);
+                    else if(booleanFourth == true)
+                        buttonFourth.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
                 }
+
                 // 0.5 seconds to go to next question.
                 new CountDownTimer(500,500){
                     @Override
@@ -165,6 +204,11 @@ public class QuizFragment extends Fragment {
                             nextQuestion(index);
                             index++;
                             buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                            buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                            buttonThird.setBackgroundResource(R.color.buttonBackground);
+                            buttonFourth.setBackgroundResource(R.color.buttonBackground);
+                            countDownTimer.cancel();
+                            countDownTimer.start();
                         }
                     }
                 }.start();
@@ -181,15 +225,25 @@ public class QuizFragment extends Fragment {
                     buttonFirst.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
+                    trueCounter+=1;
                     addScore();
                 }
-                else {
+                else if(booleanSecond == false) {
                     buttonSecond.setBackgroundColor(Color.RED);
+
+                    if(booleanFirst == true)
+                        buttonFirst.setBackgroundColor(Color.GREEN);
+                    else if(booleanThird == true)
+                        buttonThird.setBackgroundColor(Color.GREEN);
+                    else if(booleanFourth == true)
+                        buttonFourth.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonFirst.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
                 }
+
                 // 0.5 seconds to go to next question.
                 new CountDownTimer(500,500){
                     @Override
@@ -203,7 +257,12 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
+                            buttonFirst.setBackgroundResource(R.color.buttonBackground);
                             buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                            buttonThird.setBackgroundResource(R.color.buttonBackground);
+                            buttonFourth.setBackgroundResource(R.color.buttonBackground);
+                            countDownTimer.cancel();
+                            countDownTimer.start();
                         }
                     }
                 }.start();
@@ -220,15 +279,25 @@ public class QuizFragment extends Fragment {
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonFourth.setEnabled(false);
+                    trueCounter+=1;
                     addScore();
                 }
-                else {
+                else if(booleanThird == false) {
                     buttonThird.setBackgroundColor(Color.RED);
+
+                    if(booleanFirst == true)
+                        buttonFirst.setBackgroundColor(Color.GREEN);
+                    else if(booleanSecond == true)
+                        buttonSecond.setBackgroundColor(Color.GREEN);
+                    else if(booleanFourth == true)
+                        buttonFourth.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonFourth.setEnabled(false);
                 }
+
                 // 0.5 seconds to go to next question.
                 new CountDownTimer(500,500){
                     @Override
@@ -242,7 +311,12 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
+                            buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                            buttonSecond.setBackgroundResource(R.color.buttonBackground);
                             buttonThird.setBackgroundResource(R.color.buttonBackground);
+                            buttonFourth.setBackgroundResource(R.color.buttonBackground);
+                            countDownTimer.cancel();
+                            countDownTimer.start();
                         }
                     }
                 }.start();
@@ -259,15 +333,25 @@ public class QuizFragment extends Fragment {
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
+                    trueCounter+=1;
                     addScore();
                 }
-                else {
+                else if(booleanFourth == false) {
                     buttonFourth.setBackgroundColor(Color.RED);
+
+                    if(booleanFirst == true)
+                        buttonFirst.setBackgroundColor(Color.GREEN);
+                    else if(booleanSecond == true)
+                        buttonSecond.setBackgroundColor(Color.GREEN);
+                    else if(booleanThird == true)
+                        buttonThird.setBackgroundColor(Color.GREEN);
+
                     scoreList.add("false");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
                 }
+
                 // 0.5 seconds to go to next question.
                 new CountDownTimer(500,500){
                     @Override
@@ -281,7 +365,12 @@ public class QuizFragment extends Fragment {
                         else{
                             nextQuestion(index);
                             index++;
+                            buttonFirst.setBackgroundResource(R.color.buttonBackground);
+                            buttonSecond.setBackgroundResource(R.color.buttonBackground);
+                            buttonThird.setBackgroundResource(R.color.buttonBackground);
                             buttonFourth.setBackgroundResource(R.color.buttonBackground);
+                            countDownTimer.cancel();
+                            countDownTimer.start();
                         }
                     }
                 }.start();
@@ -294,6 +383,9 @@ public class QuizFragment extends Fragment {
     // Set questions to textView and choices to button for each question.
     public void nextQuestion(int index) {
             index++;
+
+            // Percentage of True (True Questions / All Questions)
+            textViewRate.setText("Questions: " + trueCounter + " / " + index);
 
             textViewQuestion.setText((index + 1) + ". " + questionList.get(index));
             buttonFirst.setText(choiceList.get(index * 4));
@@ -308,6 +400,7 @@ public class QuizFragment extends Fragment {
             booleanSecond = correctList.get((index * 4) + 1);
             booleanThird = correctList.get((index * 4) + 2);
             booleanFourth = correctList.get((index * 4) + 3);
+
     }
 
     // If the choice is correct, add 10 score.
@@ -326,7 +419,7 @@ public class QuizFragment extends Fragment {
 
     // Go to next activity, Result.
     public void gotoResult(){
-        Intent resultIntent = new Intent(getActivity(), Result.class);
+        Intent resultIntent = new Intent(getActivity().getApplicationContext(), Result.class);
         resultIntent.putStringArrayListExtra("scoreList", scoreList);
         resultIntent.putExtra("score", scoreCount);
         startActivity(resultIntent);

@@ -11,19 +11,23 @@
         android:roundIcon="@drawable/quizapp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UsernameActivity">
+        <activity
+            android:name=".Opening"
+            android:label="@string/app_name"
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UsernameActivity" />
         <activity android:name=".Categories" />
-        <activity android:name=".BooksQuiz" />
         <activity android:name=".Quiz" />
         <activity android:name=".QuizFragment" />
         <activity android:name=".Score" />
-        <activity android:name=".Result"></activity>
+        <activity android:name=".Result" />
+        <activity android:name=".Scoreboard"/>
     </application>
 
 </manifest>

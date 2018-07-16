@@ -9,7 +9,7 @@
     tools:context=".Score">
 
     <ImageView
-        android:layout_marginTop="125sp"
+        android:layout_marginTop="100sp"
         android:layout_width="250sp"
         android:layout_height="250sp"
         android:background="@drawable/quizapp"
@@ -20,8 +20,22 @@
         android:id="@+id/textViewTrueAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/text"
+        android:textColor="@color/trueAnswer"
         android:hint="True Answer(s): "
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"/>
+
+
+    <TextView
+        android:layout_marginTop="20sp"
+        android:id="@+id/textViewNullAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blankAnswer"
+        android:hint="Null Answer(s): "
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -33,7 +47,7 @@
         android:id="@+id/textViewWrongAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/text"
+        android:textColor="@color/falseAnswer"
         android:hint="Wrong Answer(s): "
         android:textSize="30sp"
         android:textStyle="bold"
@@ -62,6 +76,7 @@
         android:layout_gravity="center"
         android:background="@color/background"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="Start Again"/>
+        android:text="Add Your Score"
+        android:textSize="20sp"/>
 
 </LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10sp"
+    android:background="@color/background"
+    tools:context=".Scoreboard">
+
+    <TextView
+        android:layout_marginTop="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ALL SCORES"
+        android:textSize="30sp"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_marginTop="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:textStyle="bold"
+            android:inputType="textCapCharacters"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/textViewScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Score"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:textStyle="bold"
+            android:inputType="textCapWords"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/buttonAddScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@color/background"
+            android:onClick="addItem"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listViewScores"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_marginTop="20sp"
+        android:layout_weight="1"></ListView>
+
+</LinearLayout>

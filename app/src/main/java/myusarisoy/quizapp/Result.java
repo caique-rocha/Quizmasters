@@ -17,7 +17,7 @@ public class Result extends AppCompatActivity {
     public ArrayList<String> scoreList = new ArrayList<>(10);
 
     public Button button1, button2, button3, button4, button5,
-                  button6, button7, button8, button9, button10;
+            button6, button7, button8, button9, button10;
 
     public TextView textViewScore;
 
@@ -26,6 +26,8 @@ public class Result extends AppCompatActivity {
     public Bundle bundle;
 
     public int blankAnswer;
+
+    public int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,98 +51,98 @@ public class Result extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
 
-        final int score = bundle.getInt("score");
+        score = bundle.getInt("score");
 
         textViewScore.setText("Score: " + score);
 
         scoreList = getIntent().getStringArrayListExtra("scoreList");
 
-        if(scoreList.get(0).equals("true"))
+        if (scoreList.get(0).equals("true"))
             button1.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(0).equals("false"))
+        else if (scoreList.get(0).equals("false"))
             button1.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(0).equals("")) {
+        else if (scoreList.get(0).equals("")) {
             button1.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(1).equals("true"))
+        if (scoreList.get(1).equals("true"))
             button2.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(1).equals("false"))
+        else if (scoreList.get(1).equals("false"))
             button2.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(1).equals("")) {
+        else if (scoreList.get(1).equals("")) {
             button2.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(2).equals("true"))
+        if (scoreList.get(2).equals("true"))
             button3.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(2).equals("false"))
+        else if (scoreList.get(2).equals("false"))
             button3.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(2).equals("")) {
+        else if (scoreList.get(2).equals("")) {
             button3.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(3).equals("true"))
+        if (scoreList.get(3).equals("true"))
             button4.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(3).equals("false"))
+        else if (scoreList.get(3).equals("false"))
             button4.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(3).equals("")) {
+        else if (scoreList.get(3).equals("")) {
             button4.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(4).equals("true"))
+        if (scoreList.get(4).equals("true"))
             button5.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(4).equals("false"))
+        else if (scoreList.get(4).equals("false"))
             button5.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(4).equals("")) {
+        else if (scoreList.get(4).equals("")) {
             button5.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(4 + 1).equals("true"))
+        if (scoreList.get(4 + 1).equals("true"))
             button6.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(4 + 1).equals("false"))
+        else if (scoreList.get(4 + 1).equals("false"))
             button6.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(4 + 1).equals("")) {
+        else if (scoreList.get(4 + 1).equals("")) {
             button6.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(4 + 2).equals("true"))
+        if (scoreList.get(4 + 2).equals("true"))
             button7.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(4 + 2).equals("false"))
+        else if (scoreList.get(4 + 2).equals("false"))
             button7.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(4 + 2).equals("")) {
+        else if (scoreList.get(4 + 2).equals("")) {
             button7.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(4 + 3).equals("true"))
+        if (scoreList.get(4 + 3).equals("true"))
             button8.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(4 + 3).equals("false"))
+        else if (scoreList.get(4 + 3).equals("false"))
             button8.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(4 + 3).equals("")) {
+        else if (scoreList.get(4 + 3).equals("")) {
             button8.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(4 + 4).equals("true"))
+        if (scoreList.get(4 + 4).equals("true"))
             button9.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(4 + 4).equals("false"))
+        else if (scoreList.get(4 + 4).equals("false"))
             button9.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(4 + 4).equals("")) {
+        else if (scoreList.get(4 + 4).equals("")) {
             button9.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }
 
-        if(scoreList.get(4 + 5).equals("true"))
+        if (scoreList.get(4 + 5).equals("true"))
             button10.setBackgroundColor(Color.rgb(0, 153, 0));
-        else if(scoreList.get(4 + 5).equals("false"))
+        else if (scoreList.get(4 + 5).equals("false"))
             button10.setBackgroundColor(Color.rgb(193, 37, 37));
-        else if(scoreList.get(4 + 5).equals("")) {
+        else if (scoreList.get(4 + 5).equals("")) {
             button10.setBackgroundColor(Color.rgb(0, 0, 150));
             blankAnswer += 1;
         }

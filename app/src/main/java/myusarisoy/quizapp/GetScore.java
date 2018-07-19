@@ -31,8 +31,9 @@ public class GetScore implements Serializable {
         this.name = name;
     }
 
+    // e.g., Yuşa scored 100 points.
     public String toString() {
-        return myScore + " by " + name;
+        return name + " scored " + myScore + " points.";
     }
 
 }

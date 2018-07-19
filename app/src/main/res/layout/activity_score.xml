@@ -44,11 +44,11 @@
 
     <TextView
         android:layout_marginTop="20sp"
-        android:id="@+id/textViewWrongAnswer"
+        android:id="@+id/textViewFalseAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/falseAnswer"
-        android:hint="Wrong Answer(s): "
+        android:hint="False Answer(s): "
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"

@@ -5,66 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10sp"
+    android:padding="5sp"
     android:background="@color/background"
     tools:context=".Scoreboard">
 
     <TextView
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ALL SCORES"
-        android:textSize="30sp"
+        android:text="SCORES"
+        android:textSize="35sp"
         android:textColor="@color/text"
-        android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="center" />
 
     <LinearLayout
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="50sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_weight="1"
+            android:layout_marginLeft="30sp"
+            android:layout_weight="80"
             android:id="@+id/textViewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:textSize="18sp"
-            android:textColor="@color/text"
-            android:textStyle="bold"
-            android:inputType="textCapCharacters"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:hint="Name"
+            android:inputType="textCapCharacters"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_weight="1"
+            android:layout_marginLeft="30sp"
+            android:layout_weight="80"
             android:id="@+id/textViewScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Score"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="@color/text"
             android:textStyle="bold"
             android:inputType="textCapWords"
+            android:fontFamily="sans-serif"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"/>
 
         <Button
-            android:layout_weight="1"
             android:id="@+id/buttonAddScore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:textSize="18sp"
-            android:textColor="@color/text"
-            android:textStyle="bold"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:layout_gravity="center"
+            android:layout_marginLeft="30sp"
+            android:layout_weight="1"
+            android:background="@drawable/add"
             android:gravity="center"
-            android:background="@color/background"
-            android:onClick="addItem"/>
+            android:onClick="addItem"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:layout_marginRight="30sp"/>
 
     </LinearLayout>
 

@@ -1,9 +1,10 @@
 package myusarisoy.quizapp;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -116,28 +117,49 @@ public class Scoreboard extends AppCompatActivity {
     {
         try
         {
-            int total = new Integer(textViewScore.getText().toString());
-            String name = textViewName.getText().toString();
+                int total = new Integer(textViewScore.getText().toString());
+                String name = textViewName.getText().toString();
 
-            GetScore getScore = new GetScore(total, name);
+                GetScore getScore = new GetScore(total, name);
 
-            DatabaseReference newItemRef = databaseReference.push();
-            newItemRef.setValue(getScore);
+                DatabaseReference newItemRef = databaseReference.push();
+                newItemRef.setValue(getScore);
 
-            new CountDownTimer(2000,1000){
-                @Override
-                public void onTick(long millisUntilFinished){
-                    Toast.makeText(Scoreboard.this, "Score is added. Redirecting to main page.", Toast.LENGTH_SHORT).show();
-                }
-                @Override
-                public void onFinish(){
-                    Intent intent = new Intent(Scoreboard.this, Categories.class);
-                    startActivity(intent);
+                // FIX THESE CODE IMMEDIATELY!
+                new CountDownTimer(2000, 1000) {
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        Toast.makeText(Scoreboard.this, "Score is added.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        AlertDialog.Builder alertDialogExit = new AlertDialog.Builder(Scoreboard.this);
+                        alertDialogExit.setTitle("Exit Application");
+                        alertDialogExit.setIcon(R.drawable.quizapp);
+                        alertDialogExit.setMessage("Do you want to exit this application?");
+                        alertDialogExit.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                                        intent.addCategory(Intent.CATEGORY_HOME);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                }).show();
                     }
                 }.start();
         } catch (Exception e) {
             Toast.makeText(this, "Error ...", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 

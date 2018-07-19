@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 public class Score extends AppCompatActivity {
 
-    TextView textViewTrueAnswer, textViewWrongAnswer, textViewNullAnswer, textViewFinalScore;
+    TextView textViewTrueAnswer, textViewFalseAnswer, textViewNullAnswer, textViewFinalScore;
 
     Button buttonStartAgain;
+
+    public int trueQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,26 +24,31 @@ public class Score extends AppCompatActivity {
 
         textViewTrueAnswer = findViewById(R.id.textViewTrueAnswer);
         textViewNullAnswer = findViewById(R.id.textViewNullAnswer);
-        textViewWrongAnswer = findViewById(R.id.textViewWrongAnswer);
+        textViewFalseAnswer = findViewById(R.id.textViewFalseAnswer);
         textViewFinalScore = findViewById(R.id.textViewFinalScore);
 
         buttonStartAgain = findViewById(R.id.buttonStartAgain);
 
         int allQuestions = 10;
-        final int trueQuestions = getIntent().getIntExtra("score", 0);
+        trueQuestions = getIntent().getIntExtra("score", 0);
         final int blankAnswer = getIntent().getIntExtra("blankAnswer", 0);
 
+        // View true answer(s).
         textViewTrueAnswer.setText("True Answer(s): " + (trueQuestions / 10));
         textViewTrueAnswer.setTextColor(Color.rgb(0, 100, 0));
 
+        // View null answer(s).
         textViewNullAnswer.setText("Null Answer(s): " + blankAnswer);
         textViewNullAnswer.setTextColor(Color.rgb(0, 0, 150));
 
-        textViewWrongAnswer.setText("Wrong Answer(s): " + (allQuestions - ((trueQuestions) / 10) - blankAnswer));
-        textViewWrongAnswer.setTextColor(Color.rgb(139, 0, 0));
+        // View false answer(s).
+        textViewFalseAnswer.setText("Wrong Answer(s): " + (allQuestions - ((trueQuestions) / 10) - blankAnswer));
+        textViewFalseAnswer.setTextColor(Color.rgb(139, 0, 0));
 
+        // View total score.
         textViewFinalScore.setText("Total Score: " + trueQuestions);
 
+        // Go to next activity, Scoreboard().
         buttonStartAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -22,7 +22,7 @@ public class Categories extends AppCompatActivity {
         buttonStartQuiz = findViewById(R.id.buttonStartQuiz);
 
         // Fetch username data from the previous activity.
-        textViewReady.setText(getIntent().getStringExtra("username") + ", \nLet's Start the Quiz!");
+        textViewReady.setText(getIntent().getStringExtra("username") + "\nIf You're Ready,\nLet's Start the Quiz!");
 
         // Start quiz.
         buttonStartQuiz.setOnClickListener(new View.OnClickListener() {

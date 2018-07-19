@@ -55,7 +55,7 @@ public class QuizFragment extends Fragment {
     private ArrayList<String> questionList = new ArrayList<>();
     private ArrayList<String> choiceList = new ArrayList<>();
     private ArrayList<Boolean> correctList = new ArrayList<>();
-    public static ArrayList<String> scoreList = new ArrayList<>(10);
+    public static ArrayList<String> scores = new ArrayList<>(10);
 
     private int[] quizImages = {  R.drawable.question1, R.drawable.question2
                                 , R.drawable.question3, R.drawable.question4
@@ -85,7 +85,7 @@ public class QuizFragment extends Fragment {
         buttonFourth = root.findViewById(R.id.buttonFourth);
 
         // Set your URL tto fetch API data.
-        String url = "https://private-anon-a98702efdd-quizmasters.apiary-mock.com/questions";
+        String url = "http://private-67011-apiforquizmasters.apiary-mock.com/questions";
 
         // Fetch data.
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -129,7 +129,7 @@ public class QuizFragment extends Fragment {
             public void onFinish(){
                 if(buttonFirst.isPressed() == false || buttonSecond.isPressed() == false
                         || buttonThird.isPressed() == false || buttonFourth.isPressed() == false) {
-                    scoreList.add("");
+                    scores.add("");
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -167,7 +167,7 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booleanFirst == true) {
                     buttonFirst.setBackgroundColor(Color.GREEN);
-                    scoreList.add("true");
+                    scores.add("true");
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -184,7 +184,7 @@ public class QuizFragment extends Fragment {
                     else if(booleanFourth == true)
                         buttonFourth.setBackgroundColor(Color.GREEN);
 
-                    scoreList.add("false");
+                    scores.add("false");
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -221,7 +221,7 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booleanSecond == true) {
                     buttonSecond.setBackgroundColor(Color.GREEN);
-                    scoreList.add("true");
+                    scores.add("true");
                     buttonFirst.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -238,7 +238,7 @@ public class QuizFragment extends Fragment {
                     else if(booleanFourth == true)
                         buttonFourth.setBackgroundColor(Color.GREEN);
 
-                    scoreList.add("false");
+                    scores.add("false");
                     buttonFirst.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -275,7 +275,7 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booleanThird == true) {
                     buttonThird.setBackgroundColor(Color.GREEN);
-                    scoreList.add("true");
+                    scores.add("true");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -292,7 +292,7 @@ public class QuizFragment extends Fragment {
                     else if(booleanFourth == true)
                         buttonFourth.setBackgroundColor(Color.GREEN);
 
-                    scoreList.add("false");
+                    scores.add("false");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -329,7 +329,7 @@ public class QuizFragment extends Fragment {
             public void onClick(View v) {
                 if(booleanFourth == true) {
                     buttonFourth.setBackgroundColor(Color.GREEN);
-                    scoreList.add("true");
+                    scores.add("true");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
@@ -346,7 +346,7 @@ public class QuizFragment extends Fragment {
                     else if(booleanThird == true)
                         buttonThird.setBackgroundColor(Color.GREEN);
 
-                    scoreList.add("false");
+                    scores.add("false");
                     buttonFirst.setEnabled(false);
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
@@ -400,7 +400,6 @@ public class QuizFragment extends Fragment {
             booleanSecond = correctList.get((index * 4) + 1);
             booleanThird = correctList.get((index * 4) + 2);
             booleanFourth = correctList.get((index * 4) + 3);
-
     }
 
     // If the choice is correct, add 10 score.
@@ -420,7 +419,7 @@ public class QuizFragment extends Fragment {
     // Go to next activity, Result.
     public void gotoResult(){
         Intent resultIntent = new Intent(getActivity().getApplicationContext(), Result.class);
-        resultIntent.putStringArrayListExtra("scoreList", scoreList);
+        resultIntent.putStringArrayListExtra("scoreList", scores);
         resultIntent.putExtra("score", scoreCount);
         startActivity(resultIntent);
     }

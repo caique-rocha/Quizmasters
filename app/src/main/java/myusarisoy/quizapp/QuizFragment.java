@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class QuizFragment extends Fragment {
 
@@ -40,7 +42,7 @@ public class QuizFragment extends Fragment {
 
     private CountDownTimer countDownTimer;
 
-    private int scoreCount, trueCounter = 0, allQuestions = 0;
+    private int scoreCount, trueCounter = 0, allQuestions = 0, blankAnswer = 0;
 
     RequestQueue requestQueue;
 
@@ -61,7 +63,9 @@ public class QuizFragment extends Fragment {
                                 , R.drawable.question3, R.drawable.question4
                                 , R.drawable.question5, R.drawable.question6
                                 , R.drawable.question7, R.drawable.question8
-                                , R.drawable.question9, R.drawable.question10};
+                                , R.drawable.question9, R.drawable.question10
+                                , R.drawable.question11, R.drawable.question12
+                                , R.drawable.question13, R.drawable.question14 };
 
     public int index = 0;
 
@@ -84,7 +88,7 @@ public class QuizFragment extends Fragment {
         buttonThird = root.findViewById(R.id.buttonThird);
         buttonFourth = root.findViewById(R.id.buttonFourth);
 
-        // Set your URL tto fetch API data.
+        // Set your URL to fetch API data.
         String url = "http://private-67011-apiforquizmasters.apiary-mock.com/questions";
 
         // Fetch data.
@@ -120,7 +124,7 @@ public class QuizFragment extends Fragment {
         requestQueue.add(jsonArrayRequest);
 
         // 10 seconds to complete each of the questions.
-        countDownTimer = new CountDownTimer(10000,1000){
+        countDownTimer = new CountDownTimer(15000,1000){
             @Override
             public void onTick(long millisUntilFinished){
                 textViewTimer.setText("Remaining Time: " + millisUntilFinished / 1000);
@@ -130,6 +134,7 @@ public class QuizFragment extends Fragment {
                 if(buttonFirst.isPressed() == false || buttonSecond.isPressed() == false
                         || buttonThird.isPressed() == false || buttonFourth.isPressed() == false) {
                     scores.add("");
+                    blankAnswer += 1;
                     buttonSecond.setEnabled(false);
                     buttonThird.setEnabled(false);
                     buttonFourth.setEnabled(false);
@@ -384,6 +389,8 @@ public class QuizFragment extends Fragment {
     public void nextQuestion(int index) {
             index++;
 
+            enableButton();
+
             // Percentage of True (True Questions / All Questions)
             textViewRate.setText("Questions: " + trueCounter + " / " + index);
 
@@ -416,12 +423,14 @@ public class QuizFragment extends Fragment {
         buttonFourth.setEnabled(true);
     }
 
+
     // Go to next activity, Result.
     public void gotoResult(){
-        Intent resultIntent = new Intent(getActivity().getApplicationContext(), Result.class);
-        resultIntent.putStringArrayListExtra("scoreList", scores);
-        resultIntent.putExtra("score", scoreCount);
-        startActivity(resultIntent);
+        Intent scoreIntent = new Intent(getActivity().getApplicationContext(), Score.class);
+        scoreIntent.putStringArrayListExtra("scoreList", scores);
+        scoreIntent.putExtra("score", scoreCount);
+        scoreIntent.putExtra("blankAnswer", blankAnswer);
+        startActivity(scoreIntent);
     }
 
 }

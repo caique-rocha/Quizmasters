@@ -26,13 +26,26 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_marginLeft="30sp"
-            android:layout_weight="80"
+            android:layout_marginLeft="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.4"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:inputType="textCapCharacters"
+            android:text="Username: "
+            android:textColor="@color/text"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_marginLeft="5sp"
+            android:layout_weight="40"
             android:id="@+id/textViewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:gravity="left"
             android:hint="Name"
             android:inputType="textCapCharacters"
             android:fontFamily="sans-serif"
@@ -41,8 +54,21 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_marginLeft="30sp"
-            android:layout_weight="80"
+            android:layout_marginLeft="20sp"
+            android:layout_weight="37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Score: "
+            android:textSize="20sp"
+            android:textColor="@color/text"
+            android:inputType="textCapWords"
+            android:fontFamily="sans-serif"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_marginLeft="5sp"
+            android:layout_weight="40"
             android:id="@+id/textViewScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,16 +79,16 @@
             android:inputType="textCapWords"
             android:fontFamily="sans-serif"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:gravity="left"/>
 
         <Button
             android:id="@+id/buttonAddScore"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="55sp"
+            android:layout_height="55sp"
             android:layout_gravity="center"
-            android:layout_marginLeft="30sp"
+            android:layout_marginLeft="25sp"
             android:layout_weight="1"
-            android:background="@drawable/add"
+            android:background="@drawable/save"
             android:gravity="center"
             android:onClick="addItem"
             android:textColor="@color/text"

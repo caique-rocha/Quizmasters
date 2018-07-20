@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class Scoreboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
 
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("/Quizmasters");
@@ -136,22 +137,23 @@ public class Scoreboard extends AppCompatActivity {
                     @Override
                     public void onFinish() {
                         AlertDialog.Builder alertDialogExit = new AlertDialog.Builder(Scoreboard.this);
-                        alertDialogExit.setTitle("Exit Application");
+                        alertDialogExit.setTitle("Play Again");
                         alertDialogExit.setIcon(R.drawable.quizapp);
-                        alertDialogExit.setMessage("Do you want to exit this application?");
-                        alertDialogExit.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        alertDialogExit.setMessage("Do you want to play again?");
+                        alertDialogExit.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                Intent intent = new Intent(Intent.ACTION_MAIN);
+                                intent.addCategory(Intent.CATEGORY_HOME);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
                         })
-                                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                                        intent.addCategory(Intent.CATEGORY_HOME);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
+                                        Intent playAgain = new Intent(Scoreboard.this, UsernameActivity.class);
+                                        startActivity(playAgain);
                                     }
                                 }).show();
                     }

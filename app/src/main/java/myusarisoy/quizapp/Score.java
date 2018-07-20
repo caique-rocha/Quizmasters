@@ -5,9 +5,12 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Score extends AppCompatActivity {
 
@@ -17,10 +20,14 @@ public class Score extends AppCompatActivity {
 
     public int trueQuestions;
 
+    private ArrayList<String> score = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         textViewTrueAnswer = findViewById(R.id.textViewTrueAnswer);
         textViewNullAnswer = findViewById(R.id.textViewNullAnswer);
@@ -29,7 +36,9 @@ public class Score extends AppCompatActivity {
 
         buttonStartAgain = findViewById(R.id.buttonStartAgain);
 
-        int allQuestions = 10;
+        score = getIntent().getStringArrayListExtra("scoreList");
+        int allQuestions = score.size();
+
         trueQuestions = getIntent().getIntExtra("score", 0);
         final int blankAnswer = getIntent().getIntExtra("blankAnswer", 0);
 
